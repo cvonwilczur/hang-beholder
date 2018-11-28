@@ -7,8 +7,8 @@ const LetterBox = ({ secretWord, letterGuesses }) => {
         {
           secretWord.map((letter, i) => {
             return <Letter
-              letterValue = {secretWord[i]}
-              letterGuesses = {letterGuesses}
+              letterValue={secretWord[i]}
+              letterGuesses={letterGuesses}
               />
           })
         }

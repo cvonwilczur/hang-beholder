@@ -23,9 +23,9 @@ class App extends Component {
 
         <main>
           <RenderBox
-            attempts = {this.state.attempts}
-            secretWord = {this.state.secretWord}
-            letterGuesses = {this.state.letterGuesses}
+            attempts={this.state.attempts}
+            secretWord={this.state.secretWord}
+            letterGuesses={this.state.letterGuesses}
            />
           <InputBox />
         </main>

@@ -7,7 +7,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      secretWord: 'dummytest'
+      secretWord: ['d','u','m','m','y','t','e','s','t'],
+      attempts: 0
     };
   }
 
@@ -16,13 +17,17 @@ class App extends Component {
       <div className="App">
         <header>
           <h1> Hang-Beholder </h1>
-          <p> this is a test of the system </p>
-
-          <RenderBox />
-
-          <InputBox />
-
+          <p> Look out! The Beholder is emerging! </p>
         </header>
+
+        <main>
+          <RenderBox
+            attempts = {this.state.attempts}
+            secretWord = {this.state.secretWord}
+           />
+          <InputBox />
+        </main>
+
       </div>
     );
   }

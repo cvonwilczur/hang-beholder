@@ -1,8 +1,20 @@
 import React from 'react';
+import LetterBox from './LetterBox';
 
-const RenderBox = () => {
+const RenderBox = ({ secretWord, attempts }) => {
   return (
-    <p> This is a test of the renderbox </p>
+    <div>
+      <div>
+        {
+          secretWord.map((letter, i) => {
+            return <LetterBox
+              letterValue = {secretWord[i]}
+              />
+          })
+        }
+      </div>
+      <p> You have made {attempts} attempts! </p>
+    </div>
   )
 }
 

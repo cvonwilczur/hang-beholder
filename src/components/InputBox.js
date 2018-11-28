@@ -1,10 +1,15 @@
 import React from 'react';
 
-const InputBox = () => {
+const InputBox = (props) => {
   return (
     <div>
-      <input type="text"/>
-      <button type="button"> Try a glyph! </button>
+        <input
+        onChange={props.handleChange}
+        onKeyPress={props.handleSubmitKey}
+         type="text"/>
+        <button
+          onClick={props.handleSubmitClick}
+          >Try a glyph!</button>
     </div>
   )
 }

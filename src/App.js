@@ -10,8 +10,32 @@ class App extends Component {
       secretWord: ['d','u','m','m','y','t','e','s','t'],
       attempts: 0,
       letterGuesses: ['d', 't'],
+      inputValue: ''
     };
   }
+
+  handleChange = (event) => {
+    this.setState({ inputValue: event.target.value})
+  }
+
+  handleSubmit = (event) => {
+    let oldLetterGuesses = this.state.letterGuesses;
+    oldLetterGuesses.push(this.state.inputValue);
+    this.setState( { letterGuesses: oldLetterGuesses,
+                      attempts: this.state.attempts + 1})
+  }
+
+  handleSubmitKey = (event) => {
+    if(event.charCode === 13){
+      return this.handleSubmit(event);
+    }
+  }
+
+  handleSubmitClick = (event) => {
+    return this.handleSubmit(event);
+  }
+
+
 
   render() {
     return (
@@ -27,7 +51,11 @@ class App extends Component {
             secretWord={this.state.secretWord}
             letterGuesses={this.state.letterGuesses}
            />
-          <InputBox />
+          <InputBox
+            handleSubmitClick={this.handleSubmitClick}
+            handleSubmitKey={this.handleSubmitKey}
+            handleChange={this.handleChange}
+           />
         </main>
 
       </div>

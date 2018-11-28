@@ -8,7 +8,8 @@ class App extends Component {
     super()
     this.state = {
       secretWord: ['d','u','m','m','y','t','e','s','t'],
-      attempts: 0
+      attempts: 0,
+      letterGuesses: ['d', 't'],
     };
   }
 
@@ -24,6 +25,7 @@ class App extends Component {
           <RenderBox
             attempts = {this.state.attempts}
             secretWord = {this.state.secretWord}
+            letterGuesses = {this.state.letterGuesses}
            />
           <InputBox />
         </main>

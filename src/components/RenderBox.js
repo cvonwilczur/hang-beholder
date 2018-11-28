@@ -1,18 +1,13 @@
 import React from 'react';
 import LetterBox from './LetterBox';
 
-const RenderBox = ({ secretWord, attempts }) => {
+const RenderBox = ({ secretWord, attempts, letterGuesses }) => {
   return (
     <div>
-      <div>
-        {
-          secretWord.map((letter, i) => {
-            return <LetterBox
-              letterValue = {secretWord[i]}
-              />
-          })
-        }
-      </div>
+      <LetterBox
+          secretWord = {secretWord}
+          letterGuesses = {letterGuesses}
+      />
       <p> You have made {attempts} attempts! </p>
     </div>
   )

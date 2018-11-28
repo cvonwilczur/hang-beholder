@@ -1,10 +1,18 @@
 import React from 'react';
+import Letter from './Letter';
 
-const LetterBox = (props) => {
+const LetterBox = ({ secretWord, letterGuesses }) => {
   return (
-    <div>
-      <p> {props.letterValue} </p>
-    </div>
+      <div>
+        {
+          secretWord.map((letter, i) => {
+            return <Letter
+              letterValue = {secretWord[i]}
+              letterGuesses = {letterGuesses}
+              />
+          })
+        }
+      </div>
   )
 }
 

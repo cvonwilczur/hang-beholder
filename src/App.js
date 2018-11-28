@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import InputBox from './components/InputBox';
 import RenderBox from './components/RenderBox';
+import YouLost from './components/YouLost';
 
 class App extends Component {
   constructor() {
@@ -10,7 +11,8 @@ class App extends Component {
       secretWord: ['d','u','m','m','y','t','e','s','t'],
       attempts: 0,
       letterGuesses: ['d', 't'],
-      inputValue: ''
+      inputValue: '',
+      gameWon: false,
     };
   }
 
@@ -35,7 +37,9 @@ class App extends Component {
     return this.handleSubmit(event);
   }
 
-
+  reset = (event) => {
+    this.setState( { letterGuesses: [], attempts: 0})
+  }
 
   render() {
     return (
@@ -46,17 +50,29 @@ class App extends Component {
         </header>
 
         <main>
-          <RenderBox
-            attempts={this.state.attempts}
-            secretWord={this.state.secretWord}
-            letterGuesses={this.state.letterGuesses}
-           />
-          <InputBox
-            handleSubmitClick={this.handleSubmitClick}
-            handleSubmitKey={this.handleSubmitKey}
-            handleChange={this.handleChange}
-           />
+          { this.state.gameWon ?
+            <p> You won! </p>
+            :
+            <div>
+              <RenderBox
+                attempts={this.state.attempts}
+                secretWord={this.state.secretWord}
+                letterGuesses={this.state.letterGuesses}
+               />
+              { this.state.attempts === 6 ?
+                <YouLost reset={this.reset} />
+              :
+                <InputBox
+                  handleSubmitClick={this.handleSubmitClick}
+                  handleSubmitKey={this.handleSubmitKey}
+                  handleChange={this.handleChange}
+                 />
+               }
+            </div>
+         }
+
         </main>
+
 
       </div>
     );

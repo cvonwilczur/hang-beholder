@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import InputBox from './components/InputBox';
 import RenderBox from './components/RenderBox';
-import YouLost from './components/YouLost';
+import GameOver from './components/GameOver';
 
 class App extends Component {
   constructor() {
@@ -20,13 +20,6 @@ class App extends Component {
     this.setState({ inputValue: event.target.value})
   }
 
-  handleSubmit = (event) => {
-    let oldLetterGuesses = this.state.letterGuesses;
-    oldLetterGuesses.push(this.state.inputValue);
-    this.setState( { letterGuesses: oldLetterGuesses,
-                      attempts: this.state.attempts + 1})
-  }
-
   handleSubmitKey = (event) => {
     if(event.charCode === 13){
       return this.handleSubmit(event);
@@ -37,8 +30,20 @@ class App extends Component {
     return this.handleSubmit(event);
   }
 
-  reset = (event) => {
-    this.setState( { letterGuesses: [], attempts: 0})
+  handleSubmit = (event) => {
+    let oldLetterGuesses = this.state.letterGuesses;
+    oldLetterGuesses.push(this.state.inputValue);
+    this.setState( { letterGuesses: oldLetterGuesses })
+    if (!this.state.secretWord.includes(this.state.inputValue)){
+      this.setState({ attempts: this.state.attempts + 1 })
+    }
+    if (this.state.secretWord.every(letter => this.state.letterGuesses.indexOf(letter) > -1)){
+      this.setState({ gameWon: true })
+    }
+  }
+
+  reset = () => {
+    this.setState( { letterGuesses: [], attempts: 0, gameWon: false, inputValue: ''})
   }
 
   render() {
@@ -46,12 +51,13 @@ class App extends Component {
       <div className="App">
         <header>
           <h1> Hang-Beholder </h1>
-          <p> Look out! The Beholder is emerging! </p>
         </header>
 
         <main>
-          { this.state.gameWon ?
-            <p> You won! </p>
+          { this.state.gameWon || this.state.attempts === 6 ?
+            <GameOver
+              gameWon={this.state.gameWon}
+              reset={this.reset} />
             :
             <div>
               <RenderBox
@@ -59,15 +65,12 @@ class App extends Component {
                 secretWord={this.state.secretWord}
                 letterGuesses={this.state.letterGuesses}
                />
-              { this.state.attempts === 6 ?
-                <YouLost reset={this.reset} />
-              :
-                <InputBox
-                  handleSubmitClick={this.handleSubmitClick}
-                  handleSubmitKey={this.handleSubmitKey}
-                  handleChange={this.handleChange}
-                 />
-               }
+              <InputBox
+                handleSubmitClick={this.handleSubmitClick}
+                handleSubmitKey={this.handleSubmitKey}
+                handleChange={this.handleChange}
+               />
+
             </div>
          }
 

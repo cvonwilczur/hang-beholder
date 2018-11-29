@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1> Hang-Beholder </h1>
+          <h1> HangMage </h1>
         </header>
 
         <main>

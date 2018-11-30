@@ -8,12 +8,21 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      secretWord: ['d','u','m','m','y','t','e','s','t'],
+      secretWord: [],
       attempts: 0,
-      letterGuesses: ['d', 't'],
+      letterGuesses: [],
       inputValue: '',
       gameWon: false,
     };
+  }
+
+  componentDidMount() {
+    fetch('https://cors-anywhere.herokuapp.com/http://app.linkedin-reach.io/words')
+      .then(response => response.text())
+      .then(contents => {
+        const wordsArray = contents.split('\n')
+        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split('')})
+    })
   }
 
   handleChange = (event) => {
@@ -44,6 +53,10 @@ class App extends Component {
 
   reset = () => {
     this.setState( { letterGuesses: [], attempts: 0, gameWon: false, inputValue: ''})
+  }
+
+  randomizeNumber = () => {
+    return Math.floor(Math.random() * (16000 - 1) + 1);
   }
 
   render() {

@@ -78,48 +78,30 @@ class App extends Component {
     switch(param){
       case 1:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholder' src={beholderone}/>
-          </div>
           );
       case 2:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholdertwo' src={beholdertwo}/>
-          </div>
           );
       case 3:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholderthree' src={beholderthree}/>
-          </div>
           );
       case 4:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholderfour' src={beholderfour}/>
-          </div>
           );
       case 5:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholderfive' src={beholderfive}/>
-          </div>
           );
       case 6:
         return (
-          <div>
-            <img className='portal' src={portal}/>
             <img className='beholdersix' src={beholdersix}/>
-          </div>
           );
       default:
-        return <img className='portal' src={portal}/>;
+        break;
     }
   }
 
@@ -133,6 +115,7 @@ class App extends Component {
         <main>
 
             <div>
+              <img className='portal' src={portal}/>
               {this.renderBeholderSwitch(this.state.attempts)}
 
               <RenderBox

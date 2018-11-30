@@ -8,12 +8,23 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      secretWord: ['d','u','m','m','y','t','e','s','t'],
+      secretWord: [],
       attempts: 0,
-      letterGuesses: ['d', 't'],
+      letterGuesses: [],
       inputValue: '',
       gameWon: false,
+      secretWords: []
     };
+  }
+
+  componentDidMount() {
+    fetch('https://cors-anywhere.herokuapp.com/http://app.linkedin-reach.io/words')
+      .then(response => response.text())
+      .then(contents => {
+        const wordsArray = contents.split('\n')
+        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split(''),
+                        secretWords: wordsArray})
+    })
   }
 
   handleChange = (event) => {
@@ -43,14 +54,23 @@ class App extends Component {
   }
 
   reset = () => {
-    this.setState( { letterGuesses: [], attempts: 0, gameWon: false, inputValue: ''})
+    this.setState( {
+      letterGuesses: [],
+      attempts: 0,
+      gameWon: false,
+      inputValue: '',
+      secretWord: this.state.secretWords[this.randomizeNumber()].split('')})
+  }
+
+  randomizeNumber = () => {
+    return Math.floor(Math.random() * (162000) + 1);
   }
 
   render() {
     return (
       <div className="App">
         <header>
-          <h1> Hang-Beholder </h1>
+          <h1> HangMage </h1>
         </header>
 
         <main>

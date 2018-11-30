@@ -8,7 +8,7 @@ const RenderBox = ({ secretWord, attempts, letterGuesses }) => {
           secretWord={secretWord}
           letterGuesses={letterGuesses}
       />
-      <p> You have made {attempts} attempts! </p>
+      <p> You have made {attempts} failed attempts! </p>
     </div>
   )
 }

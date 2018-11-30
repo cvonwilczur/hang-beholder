@@ -2,7 +2,7 @@ import React from 'react';
 
 const Letter = ({ letterGuesses, letterValue }) => {
   return (
-      <p> {letterGuesses.includes(letterValue) ? letterValue : '_'} </p>
+      <p className="letter"> {letterGuesses.includes(letterValue) ? letterValue : '_'} </p>
   )
 }
 

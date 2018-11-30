@@ -3,12 +3,13 @@ import Letter from './Letter';
 
 const LetterBox = ({ secretWord, letterGuesses }) => {
   return (
-      <div>
+      <div className="letterBox">
         {
           secretWord.map((letter, i) => {
             return <Letter
               letterValue={secretWord[i]}
               letterGuesses={letterGuesses}
+              key={i}
               />
           })
         }

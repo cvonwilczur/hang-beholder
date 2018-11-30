@@ -13,6 +13,7 @@ class App extends Component {
       letterGuesses: [],
       inputValue: '',
       gameWon: false,
+      secretWords: []
     };
   }
 
@@ -21,7 +22,8 @@ class App extends Component {
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n')
-        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split('')})
+        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split(''),
+                        secretWords: wordsArray})
     })
   }
 
@@ -52,11 +54,16 @@ class App extends Component {
   }
 
   reset = () => {
-    this.setState( { letterGuesses: [], attempts: 0, gameWon: false, inputValue: ''})
+    this.setState( {
+      letterGuesses: [],
+      attempts: 0,
+      gameWon: false,
+      inputValue: '',
+      secretWord: this.state.secretWords[this.randomizeNumber()].split('')})
   }
 
   randomizeNumber = () => {
-    return Math.floor(Math.random() * (16000 - 1) + 1);
+    return Math.floor(Math.random() * (162000) + 1);
   }
 
   render() {

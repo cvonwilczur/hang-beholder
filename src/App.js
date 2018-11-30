@@ -3,6 +3,7 @@ import './App.css';
 import InputBox from './components/InputBox';
 import RenderBox from './components/RenderBox';
 import GameOver from './components/GameOver';
+import portal from './portal.svg';
 
 class App extends Component {
   constructor() {
@@ -80,6 +81,8 @@ class App extends Component {
               reset={this.reset} />
             :
             <div>
+              <img className='portal' src={portal} width='20%' />
+
               <RenderBox
                 attempts={this.state.attempts}
                 secretWord={this.state.secretWord}

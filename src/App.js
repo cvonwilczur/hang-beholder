@@ -132,7 +132,6 @@ class App extends Component {
                 handleSubmitClick={this.handleSubmitClick}
                 handleSubmitKey={this.handleSubmitKey}
                 handleChange={this.handleChange}
-                letterGuesses={this.state.letterGuesses}
                />
              }
 

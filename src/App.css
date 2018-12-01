@@ -14,9 +14,13 @@
 }
 
 .letterBox {
-  display: flex;
   width: 50%;
-  margin: 0 auto;
+  margin: 5% auto;
+}
+
+.letterBoxLetters{
+  display: flex;
+  margin: 5% auto;
 }
 
 .letter {

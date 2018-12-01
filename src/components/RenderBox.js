@@ -3,7 +3,7 @@ import LetterBox from './LetterBox';
 
 const RenderBox = ({ secretWord, attempts, letterGuesses }) => {
   return (
-    <div>
+    <div className="renderBox">
       <LetterBox
           secretWord={secretWord}
           letterGuesses={letterGuesses}

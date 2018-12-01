@@ -3,6 +3,14 @@ import './App.css';
 import InputBox from './components/InputBox';
 import RenderBox from './components/RenderBox';
 import GameOver from './components/GameOver';
+import portal from './portal.svg';
+import beholderone from './beholder_stage_1.svg';
+import beholdertwo from './beholder_stage_2.svg';
+import beholderthree from './beholder_stage_3.svg';
+import beholderfour from './beholder_stage_4.svg';
+import beholderfive from './beholder_stage_5.svg';
+import beholdersix from './beholder_stage_6.svg';
+
 
 class App extends Component {
   constructor() {
@@ -66,6 +74,37 @@ class App extends Component {
     return Math.floor(Math.random() * (162000) + 1);
   }
 
+  renderBeholderSwitch = (param) => {
+    switch(param){
+      case 1:
+        return (
+            <img className='beholder' src={beholderone}/>
+          );
+      case 2:
+        return (
+            <img className='beholdertwo' src={beholdertwo}/>
+          );
+      case 3:
+        return (
+            <img className='beholderthree' src={beholderthree}/>
+          );
+      case 4:
+        return (
+            <img className='beholderfour' src={beholderfour}/>
+          );
+      case 5:
+        return (
+            <img className='beholderfive' src={beholderfive}/>
+          );
+      case 6:
+        return (
+            <img className='beholdersix' src={beholdersix}/>
+          );
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -74,25 +113,31 @@ class App extends Component {
         </header>
 
         <main>
-          { this.state.gameWon || this.state.attempts === 6 ?
-            <GameOver
-              gameWon={this.state.gameWon}
-              reset={this.reset} />
-            :
+
             <div>
+              <img className='portal' src={portal}/>
+              {this.renderBeholderSwitch(this.state.attempts)}
+
               <RenderBox
                 attempts={this.state.attempts}
                 secretWord={this.state.secretWord}
                 letterGuesses={this.state.letterGuesses}
                />
+             { this.state.gameWon || this.state.attempts === 6 ?
+               <GameOver
+                 gameWon={this.state.gameWon}
+                 reset={this.reset} />
+                 :
               <InputBox
                 handleSubmitClick={this.handleSubmitClick}
                 handleSubmitKey={this.handleSubmitKey}
                 handleChange={this.handleChange}
+                letterGuesses={this.state.letterGuesses}
                />
+             }
 
             </div>
-         }
+
 
         </main>
 

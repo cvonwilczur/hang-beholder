@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -27,11 +22,74 @@
 .letter {
   padding: 10px;
   margin: 0 auto;
-
-
 }
 
-@keyframes App-logo-spin {
+.portal {
+  animation: portal-spin infinite 20s linear;
+  width: 20%;
+}
+
+.beholder {
+  width: 20%;
+  animation: emerge 5s;
+}
+
+.beholdertwo {
+  width: 20%;
+  animation: emerge2 5s;
+}
+
+.beholderthree {
+  width: 20%;
+  animation: emerge3 5s;
+}
+
+.beholderfour {
+  width: 20%;
+  animation: emerge4 5s;
+}
+
+.beholderfive {
+  width: 20%;
+  animation: emerge5 5s;
+}
+
+.beholdersix {
+  width: 20%;
+  animation: emerge6 5s;
+}
+
+@keyframes portal-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes emerge {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge2 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge3 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge4 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge5 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge6 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

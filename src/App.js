@@ -21,7 +21,12 @@ class App extends Component {
       letterGuesses: [],
       inputValue: '',
       gameWon: false,
-      secretWords: []
+      secretWords: [],
+      easyWords: [],
+      medWords: null,
+      hardWords: null,
+      radioValue: '',
+      difficulty: 'Easy'
     };
   }
 
@@ -30,14 +35,50 @@ class App extends Component {
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n')
-        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split(''),
-                        secretWords: wordsArray})
+        const easyArray = wordsArray.filter(word => word.length <= 4)
+        this.setState({ secretWord: easyArray[this.randomizeNumber(easyArray.length)].split(''),
+                        secretWords: wordsArray,
+                        easyWords: easyArray})
     })
   }
 
   handleChange = (event) => {
-    this.setState({ inputValue: event.target.value})
+    this.setState({ inputValue: event.target.value.toLowerCase()});
   }
+
+  handleChangeRadio = (event) => {
+    const { secretWords, easyWords, medWords, hardWords } = this.state;
+    this.reset();
+    this.setState({ difficulty: event.target.value });
+    switch(event.target.value){
+      case 'Easy':
+        this.setState( {
+          secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
+        break;
+      case 'Medium':
+        if(!medWords){
+          const medArray = secretWords.filter(word => word.length <= 6 && word.length > 4);
+          this.setState({ medWords: medArray,
+                          secretWord: medArray[this.randomizeNumber(medArray.length)].split('')
+                        });
+        } else {
+          this.setState( {
+            secretWord: medWords[this.randomizeNumber(medWords.length)].split('')})
+        }
+        break;
+      case 'Hard':
+        if(!hardWords){
+          const hardArray = secretWords.filter(word => word.length > 6);
+          this.setState({ hardWords: hardArray,
+                          secretWord: hardArray[this.randomizeNumber(hardArray.length)].split('')
+                        });
+        } else {
+          this.setState( {
+            secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')})
+        }
+        break;
+      }
+    }
 
   handleSubmitKey = (event) => {
     if(event.charCode === 13){
@@ -50,28 +91,33 @@ class App extends Component {
   }
 
   handleSubmit = (event) => {
-    let oldLetterGuesses = this.state.letterGuesses;
-    oldLetterGuesses.push(this.state.inputValue);
-    this.setState( { letterGuesses: oldLetterGuesses })
-    if (!this.state.secretWord.includes(this.state.inputValue)){
-      this.setState({ attempts: this.state.attempts + 1 })
+    const { inputValue, letterGuesses, attempts, secretWord } = this.state;
+    const oldLetterGuesses = letterGuesses;
+    if (!secretWord.includes(inputValue) && inputValue !== secretWord.join('') && inputValue && !oldLetterGuesses.includes(inputValue)){
+      this.setState({ attempts: attempts + 1 })
     }
-    if (this.state.secretWord.every(letter => this.state.letterGuesses.indexOf(letter) > -1)){
+    oldLetterGuesses.push(inputValue);
+    this.setState( { letterGuesses: oldLetterGuesses })
+    if (secretWord.every(letter => letterGuesses.indexOf(letter) > -1) || inputValue === secretWord.join('')){
       this.setState({ gameWon: true })
     }
   }
 
   reset = () => {
+    const { easyWords } = this.state;
     this.setState( {
       letterGuesses: [],
       attempts: 0,
       gameWon: false,
       inputValue: '',
-      secretWord: this.state.secretWords[this.randomizeNumber()].split('')})
+      difficulty: 'Easy',
+      secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
   }
 
-  randomizeNumber = () => {
-    return Math.floor(Math.random() * (162000) + 1);
+  randomizeNumber = (upperLimit) => {
+    let min = Math.ceil(1);
+    let max = Math.floor(upperLimit);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   renderBeholderSwitch = (param) => {
@@ -106,6 +152,7 @@ class App extends Component {
   }
 
   render() {
+    const { attempts, secretWord, letterGuesses, gameWon, difficulty } = this.state;
     return (
       <div className="App">
         <header>
@@ -113,32 +160,27 @@ class App extends Component {
         </header>
 
         <main>
-
-            <div>
               <img className='portal' src={portal}/>
-              {this.renderBeholderSwitch(this.state.attempts)}
+              {this.renderBeholderSwitch(attempts)}
 
               <RenderBox
-                attempts={this.state.attempts}
-                secretWord={this.state.secretWord}
-                letterGuesses={this.state.letterGuesses}
+                attempts={attempts}
+                secretWord={secretWord}
+                letterGuesses={letterGuesses}
                />
-             { this.state.gameWon || this.state.attempts === 6 ?
+             { gameWon || attempts === 6 ?
                <GameOver
-                 gameWon={this.state.gameWon}
+                 gameWon={gameWon}
                  reset={this.reset} />
                  :
               <InputBox
                 handleSubmitClick={this.handleSubmitClick}
                 handleSubmitKey={this.handleSubmitKey}
                 handleChange={this.handleChange}
-                letterGuesses={this.state.letterGuesses}
+                handleChangeRadio={this.handleChangeRadio}
+                difficulty={difficulty}
                />
              }
-
-            </div>
-
-
         </main>
 
 

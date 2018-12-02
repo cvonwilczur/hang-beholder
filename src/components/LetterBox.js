@@ -4,6 +4,7 @@ import Letter from './Letter';
 const LetterBox = ({ secretWord, letterGuesses }) => {
   return (
       <div className="letterBox">
+        <div className="letterBoxLetters">
         {
           secretWord.map((letter, i) => {
             return <Letter
@@ -13,6 +14,19 @@ const LetterBox = ({ secretWord, letterGuesses }) => {
               />
           })
         }
+      </div>
+      <div className="letterBoxLetters">
+          Glyphs Guessed:
+          {
+            letterGuesses.map((letter, i) => {
+              return <Letter
+                letterValue={letterGuesses[i]}
+                letterGuesses={letterGuesses}
+                key={i}
+              />
+            })
+          }
+        </div>
       </div>
   )
 }

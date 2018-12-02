@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ inputValue: event.target.value});
+    this.setState({ inputValue: event.target.value.toLowerCase()});
   }
 
   handleChangeRadio = (event) => {
@@ -77,14 +77,14 @@ class App extends Component {
   }
 
   handleSubmit = (event) => {
-    const { inputValue, letterGuesses, attempts } = this.state;
+    const { inputValue, letterGuesses, attempts, secretWord } = this.state;
     const oldLetterGuesses = letterGuesses;
     oldLetterGuesses.push(inputValue);
     this.setState( { letterGuesses: oldLetterGuesses })
-    if (!this.state.secretWord.includes(inputValue)){
+    if (!secretWord.includes(inputValue) && inputValue !== secretWord.join('')){
       this.setState({ attempts: attempts + 1 })
     }
-    if (this.state.secretWord.every(letter => letterGuesses.indexOf(letter) > -1)){
+    if (secretWord.every(letter => letterGuesses.indexOf(letter) > -1) || inputValue === secretWord.join('')){
       this.setState({ gameWon: true })
     }
   }

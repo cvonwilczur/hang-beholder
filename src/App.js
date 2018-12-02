@@ -77,6 +77,8 @@ class App extends Component {
             secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')})
         }
         break;
+        default:
+          break;
       }
     }
 
@@ -124,27 +126,27 @@ class App extends Component {
     switch(param){
       case 1:
         return (
-            <img className='beholder' src={beholderone}/>
+            <img className='beholder' src={beholderone} alt="beholder"/>
           );
       case 2:
         return (
-            <img className='beholdertwo' src={beholdertwo}/>
+            <img className='beholdertwo' src={beholdertwo} alt="beholder"/>
           );
       case 3:
         return (
-            <img className='beholderthree' src={beholderthree}/>
+            <img className='beholderthree' src={beholderthree} alt="beholder"/>
           );
       case 4:
         return (
-            <img className='beholderfour' src={beholderfour}/>
+            <img className='beholderfour' src={beholderfour} alt="beholder"/>
           );
       case 5:
         return (
-            <img className='beholderfive' src={beholderfive}/>
+            <img className='beholderfive' src={beholderfive} alt="beholder"/>
           );
       case 6:
         return (
-            <img className='beholdersix' src={beholdersix}/>
+            <img className='beholdersix' src={beholdersix} alt="beholder"/>
           );
       default:
         break;
@@ -160,7 +162,7 @@ class App extends Component {
         </header>
 
         <main>
-              <img className='portal' src={portal}/>
+              <img className='portal' src={portal} alt="portal"/>
               {this.renderBeholderSwitch(attempts)}
 
               <RenderBox

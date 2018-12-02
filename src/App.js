@@ -22,6 +22,9 @@ class App extends Component {
       inputValue: '',
       gameWon: false,
       secretWords: [],
+      easyWords: [],
+      medWords: null,
+      hardWords: null,
       radioValue: '',
       difficulty: 'Easy'
     };
@@ -32,8 +35,10 @@ class App extends Component {
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n')
-        this.setState({ secretWord: wordsArray[this.randomizeNumber(this.state.secretWords.length)].split(''),
-                        secretWords: wordsArray})
+        const easyArray = wordsArray.filter(word => word.length <= 4)
+        this.setState({ secretWord: easyArray[this.randomizeNumber(easyArray.length)].split(''),
+                        secretWords: wordsArray,
+                        easyWords: easyArray})
     })
   }
 
@@ -42,26 +47,35 @@ class App extends Component {
   }
 
   handleChangeRadio = (event) => {
-    const { secretWords } = this.state;
+    const { secretWords, easyWords, medWords, hardWords } = this.state;
     this.reset();
     this.setState({ difficulty: event.target.value });
     switch(event.target.value){
       case 'Easy':
-        const easyArray = secretWords.filter(word => word.length <= 4)
         this.setState( {
-          secretWord: easyArray[this.randomizeNumber(easyArray.length)].split('')})
+          secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
         break;
       case 'Medium':
-        const medArray = secretWords.filter(word => word.length <= 6 && word.length >= 4)
-        this.setState( {
-          secretWord: medArray[this.randomizeNumber(medArray.length)].split('')})
+        if(!medWords){
+          const medArray = secretWords.filter(word => word.length <= 6 && word.length > 4);
+          this.setState({ medWords: medArray,
+                          secretWord: medArray[this.randomizeNumber(medArray.length)].split('')
+                        });
+        } else {
+          this.setState( {
+            secretWord: medWords[this.randomizeNumber(medWords.length)].split('')})
+        }
         break;
       case 'Hard':
-        const hardArray = secretWords.filter(word => word.length > 6);
-        this.setState( {
-          secretWord: hardArray[this.randomizeNumber(hardArray.length)].split('')})
-        break;
-      default:
+        if(!hardWords){
+          const hardArray = secretWords.filter(word => word.length > 6);
+          this.setState({ hardWords: hardArray,
+                          secretWord: hardArray[this.randomizeNumber(hardArray.length)].split('')
+                        });
+        } else {
+          this.setState( {
+            secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')})
+        }
         break;
       }
     }
@@ -90,19 +104,20 @@ class App extends Component {
   }
 
   reset = () => {
-    const { secretWords } = this.state;
-    const easyArray = secretWords.filter(word => word.length <= 4)
+    const { easyWords } = this.state;
     this.setState( {
       letterGuesses: [],
       attempts: 0,
       gameWon: false,
       inputValue: '',
       difficulty: 'Easy',
-      secretWord: easyArray[this.randomizeNumber(easyArray.length)].split('')})
+      secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
   }
 
   randomizeNumber = (upperLimit) => {
-    return Math.floor(Math.random() * (upperLimit) + 1);
+    let min = Math.ceil(1);
+    let max = Math.floor(upperLimit);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   renderBeholderSwitch = (param) => {

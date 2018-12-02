@@ -21,7 +21,9 @@ class App extends Component {
       letterGuesses: [],
       inputValue: '',
       gameWon: false,
-      secretWords: []
+      secretWords: [],
+      radioValue: '',
+      difficulty: 'Easy'
     };
   }
 
@@ -30,14 +32,39 @@ class App extends Component {
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n')
-        this.setState({ secretWord: wordsArray[this.randomizeNumber()].split(''),
+        this.setState({ secretWord: wordsArray[this.randomizeNumber(this.state.secretWords.length)].split(''),
                         secretWords: wordsArray})
     })
   }
 
   handleChange = (event) => {
-    this.setState({ inputValue: event.target.value})
+    this.setState({ inputValue: event.target.value});
   }
+
+  handleChangeRadio = (event) => {
+    const { secretWords } = this.state;
+    this.reset();
+    this.setState({ difficulty: event.target.value });
+    switch(event.target.value){
+      case 'Easy':
+        const easyArray = secretWords.filter(word => word.length <= 4)
+        this.setState( {
+          secretWord: easyArray[this.randomizeNumber(easyArray.length)].split('')})
+        break;
+      case 'Medium':
+        const medArray = secretWords.filter(word => word.length <= 6 && word.length >= 4)
+        this.setState( {
+          secretWord: medArray[this.randomizeNumber(medArray.length)].split('')})
+        break;
+      case 'Hard':
+        const hardArray = secretWords.filter(word => word.length > 6);
+        this.setState( {
+          secretWord: hardArray[this.randomizeNumber(hardArray.length)].split('')})
+        break;
+      default:
+        break;
+      }
+    }
 
   handleSubmitKey = (event) => {
     if(event.charCode === 13){
@@ -50,28 +77,32 @@ class App extends Component {
   }
 
   handleSubmit = (event) => {
-    let oldLetterGuesses = this.state.letterGuesses;
-    oldLetterGuesses.push(this.state.inputValue);
+    const { inputValue, letterGuesses, attempts } = this.state;
+    const oldLetterGuesses = letterGuesses;
+    oldLetterGuesses.push(inputValue);
     this.setState( { letterGuesses: oldLetterGuesses })
-    if (!this.state.secretWord.includes(this.state.inputValue)){
-      this.setState({ attempts: this.state.attempts + 1 })
+    if (!this.state.secretWord.includes(inputValue)){
+      this.setState({ attempts: attempts + 1 })
     }
-    if (this.state.secretWord.every(letter => this.state.letterGuesses.indexOf(letter) > -1)){
+    if (this.state.secretWord.every(letter => letterGuesses.indexOf(letter) > -1)){
       this.setState({ gameWon: true })
     }
   }
 
   reset = () => {
+    const { secretWords } = this.state;
+    const easyArray = secretWords.filter(word => word.length <= 4)
     this.setState( {
       letterGuesses: [],
       attempts: 0,
       gameWon: false,
       inputValue: '',
-      secretWord: this.state.secretWords[this.randomizeNumber()].split('')})
+      difficulty: 'Easy',
+      secretWord: easyArray[this.randomizeNumber(easyArray.length)].split('')})
   }
 
-  randomizeNumber = () => {
-    return Math.floor(Math.random() * (162000) + 1);
+  randomizeNumber = (upperLimit) => {
+    return Math.floor(Math.random() * (upperLimit) + 1);
   }
 
   renderBeholderSwitch = (param) => {
@@ -106,6 +137,7 @@ class App extends Component {
   }
 
   render() {
+    const { attempts, secretWord, letterGuesses, gameWon, difficulty } = this.state;
     return (
       <div className="App">
         <header>
@@ -113,31 +145,27 @@ class App extends Component {
         </header>
 
         <main>
-
-            <div>
               <img className='portal' src={portal}/>
-              {this.renderBeholderSwitch(this.state.attempts)}
+              {this.renderBeholderSwitch(attempts)}
 
               <RenderBox
-                attempts={this.state.attempts}
-                secretWord={this.state.secretWord}
-                letterGuesses={this.state.letterGuesses}
+                attempts={attempts}
+                secretWord={secretWord}
+                letterGuesses={letterGuesses}
                />
-             { this.state.gameWon || this.state.attempts === 6 ?
+             { gameWon || attempts === 6 ?
                <GameOver
-                 gameWon={this.state.gameWon}
+                 gameWon={gameWon}
                  reset={this.reset} />
                  :
               <InputBox
                 handleSubmitClick={this.handleSubmitClick}
                 handleSubmitKey={this.handleSubmitKey}
                 handleChange={this.handleChange}
+                handleChangeRadio={this.handleChangeRadio}
+                difficulty={difficulty}
                />
              }
-
-            </div>
-
-
         </main>
 
 

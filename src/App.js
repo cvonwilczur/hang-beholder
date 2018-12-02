@@ -79,11 +79,11 @@ class App extends Component {
   handleSubmit = (event) => {
     const { inputValue, letterGuesses, attempts, secretWord } = this.state;
     const oldLetterGuesses = letterGuesses;
-    oldLetterGuesses.push(inputValue);
-    this.setState( { letterGuesses: oldLetterGuesses })
-    if (!secretWord.includes(inputValue) && inputValue !== secretWord.join('')){
+    if (!secretWord.includes(inputValue) && inputValue !== secretWord.join('') && inputValue && !oldLetterGuesses.includes(inputValue)){
       this.setState({ attempts: attempts + 1 })
     }
+    oldLetterGuesses.push(inputValue);
+    this.setState( { letterGuesses: oldLetterGuesses })
     if (secretWord.every(letter => letterGuesses.indexOf(letter) > -1) || inputValue === secretWord.join('')){
       this.setState({ gameWon: true })
     }

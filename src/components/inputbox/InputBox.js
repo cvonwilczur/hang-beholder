@@ -15,9 +15,9 @@ const InputBox = (props) => {
         </div>
         <div className="difficultyBox">
             Choose a Difficulty:
-              <input type="radio" name="difficulty" value="Easy" onChange={props.handleChangeRadio} checked={props.difficulty === 'Easy'}/> Easy (Default)
-              <input type="radio" name="difficulty" value="Medium" onChange={props.handleChangeRadio} checked={props.difficulty === 'Medium'}/> Medium
-              <input type="radio" name="difficulty" value="Hard" onChange={props.handleChangeRadio} checked={props.difficulty === 'Hard'}/> Hard
+              <input className="radioButton" type="radio" name="difficulty" value="Easy" onChange={props.handleChangeRadio} checked={props.difficulty === 'Easy'}/> Easy (Default)
+              <input className="radioButton" type="radio" name="difficulty" value="Medium" onChange={props.handleChangeRadio} checked={props.difficulty === 'Medium'}/> Medium
+              <input className="radioButton" type="radio" name="difficulty" value="Hard" onChange={props.handleChangeRadio} checked={props.difficulty === 'Hard'}/> Hard
         </div>
     </div>
   )

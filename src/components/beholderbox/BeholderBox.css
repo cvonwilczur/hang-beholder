@@ -1,0 +1,82 @@
+.portalBeholderContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.portalBox {
+  width: 30%;
+}
+
+.beholderBox {
+  width: 30%;
+}
+
+.portal {
+  animation: portal-spin infinite 20s linear;
+  width: 50%;
+}
+
+.beholder {
+  width: 50%;
+  animation: emerge 5s;
+}
+
+.beholdertwo {
+  width: 50%;
+  animation: emerge2 5s;
+}
+
+.beholderthree {
+  width: 50%;
+  animation: emerge3 5s;
+}
+
+.beholderfour {
+  width: 50%;
+  animation: emerge4 5s;
+}
+
+.beholderfive {
+  width: 50%;
+  animation: emerge5 5s;
+}
+
+.beholdersix {
+  width: 50%;
+  animation: emerge6 5s;
+}
+
+@keyframes portal-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes emerge {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge2 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge3 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge4 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge5 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes emerge6 {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

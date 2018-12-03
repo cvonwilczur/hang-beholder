@@ -1,9 +1,16 @@
 .letterBox {
-  width: 50%;
-  margin: 0 auto;
+  width: 60%;
+  margin: 2% auto;
 }
 
 .letterBoxLetters{
   display: flex;
   margin: 2% auto;
+}
+
+.guessBoxLetters{
+  display: flex;
+  margin: 0 auto;
+  font-size: 18px;
+  height: 32px;
 }

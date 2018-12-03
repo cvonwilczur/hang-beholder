@@ -1,9 +1,13 @@
 import React from 'react';
 import './Letter.css'
 
-const Letter = ({ letterGuesses, letterValue }) => {
+const Letter = ({ letterGuesses, letterValue, guessLetter }) => {
   return (
-      <p className="letter"> {letterGuesses.includes(letterValue) ? letterValue : '☐'} </p>
+      guessLetter ?
+        <span className="guessedletterTiles"> {letterGuesses.includes(letterValue) ? letterValue : '☐'} </span>
+      :
+        <span className="letterTiles">{letterGuesses.includes(letterValue) ? letterValue : '☐'} </span>
+
   )
 }
 

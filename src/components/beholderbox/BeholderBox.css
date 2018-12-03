@@ -13,36 +13,36 @@
 
 .portal {
   animation: portal-spin infinite 20s linear;
-  width: 50%;
+  width: 60%;
 }
 
 .beholder {
-  width: 50%;
+  width: 80%;
   animation: emerge 5s;
 }
 
 .beholdertwo {
-  width: 50%;
+  width: 80%;
   animation: emerge2 5s;
 }
 
 .beholderthree {
-  width: 50%;
+  width: 80%;
   animation: emerge3 5s;
 }
 
 .beholderfour {
-  width: 50%;
+  width: 80%;
   animation: emerge4 5s;
 }
 
 .beholderfive {
-  width: 50%;
+  width: 80%;
   animation: emerge5 5s;
 }
 
 .beholdersix {
-  width: 50%;
+  width: 80%;
   animation: emerge6 5s;
 }
 

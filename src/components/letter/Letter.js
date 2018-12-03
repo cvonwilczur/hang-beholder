@@ -1,8 +1,9 @@
 import React from 'react';
+import './Letter.css'
 
 const Letter = ({ letterGuesses, letterValue }) => {
   return (
-      <p className="letter"> {letterGuesses.includes(letterValue) ? letterValue : '_'} </p>
+      <p className="letter"> {letterGuesses.includes(letterValue) ? letterValue : '☐'} </p>
   )
 }
 

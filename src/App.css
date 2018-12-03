@@ -1,32 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Roboto');
+
 .App {
   text-align: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+h1 {
+  font-family: 'Bungee Shade', cursive;
+  font-weight: 200;
+  font-size: 64px;
+  color: #FF0092;
 }
 
-.App-intro {
-  font-size: large;
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #313640;
+  font-weight: bold;
+  color: #FF0092;
 }
 
-.letterBox {
-  width: 50%;
-  margin: 5% auto;
+/* credit to George-Payne's codepen for below grid */
+.grid{
+  top: -400px;
+  bottom: -400px;
+  left: -400px;
+  right: -400px;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.5;
+
+  background-color: #313640;
+  background-image: linear-gradient(#FF0092 1px, transparent 2px),
+  linear-gradient(90deg, #FF0092 1px, transparent 2px);
+  background-size:3% 3%, 3% 3%;
+  background-position:0 0, 0 0;
+
+  transform: perspective(300px) rotateX(80deg);
 }
 
-.letterBoxLetters{
-  display: flex;
-  margin: 5% auto;
-}
-
-.letter {
-  padding: 10px;
-  margin: 0 auto;
-}
 
 .portal {
   animation: portal-spin infinite 20s linear;

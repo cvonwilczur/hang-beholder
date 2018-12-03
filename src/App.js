@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import InputBox from './components/InputBox';
-import RenderBox from './components/RenderBox';
-import GameOver from './components/GameOver';
+import InputBox from './components/inputbox/InputBox';
+import RenderBox from './components/renderbox/RenderBox';
+import GameOver from './components/gameover/GameOver';
 import portal from './portal.svg';
 import beholderone from './beholder_stage_1.svg';
 import beholdertwo from './beholder_stage_2.svg';
@@ -164,7 +164,6 @@ class App extends Component {
         <main>
               <img className='portal' src={portal} alt="portal"/>
               {this.renderBeholderSwitch(attempts)}
-
               <RenderBox
                 attempts={attempts}
                 secretWord={secretWord}
@@ -183,6 +182,7 @@ class App extends Component {
                 difficulty={difficulty}
                />
              }
+             <div className="grid"></div>
         </main>
 
 

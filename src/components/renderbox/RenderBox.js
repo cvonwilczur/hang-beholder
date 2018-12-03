@@ -1,5 +1,5 @@
 import React from 'react';
-import LetterBox from './LetterBox';
+import LetterBox from '../letterbox/LetterBox';
 
 const RenderBox = ({ secretWord, attempts, letterGuesses }) => {
   return (

@@ -1,14 +1,15 @@
 import React from 'react';
+import './Inputbox.css';
 
 const InputBox = (props) => {
   return (
     <div>
         <div className="submitBox">
-          <input
+          <input className="submitInput"
           onChange={props.handleChange}
           onKeyPress={props.handleSubmitKey}
            type="text"/>
-          <button
+          <button className="submitButton"
             onClick={props.handleSubmitClick}
             >Try a glyph!</button>
         </div>

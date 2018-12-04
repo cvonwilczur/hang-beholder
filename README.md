@@ -12,9 +12,11 @@ Wizard! Your sorcery has never been so crucial as it is now; time has slowed to 
 
 2) Navigate to the folder of the repo and "npm install" the dependencies.
 
-3) Once the install is complete, launch the app in dev mode using "npm start"
+3) Once the install is complete, launch the app in dev mode using "npm start".
 
 4) You can play by entering in letters or words in the input; the app tracks your attempts and you will lose the game at 6 total attempts You can change the difficulty using the radio buttons at the bottom of the screen.
+
+5) You can also find Hangmage available online at https://hangmage.herokuapp.com/
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

@@ -1,5 +1,5 @@
 
-Welcome to Hang-Beholder, my spin on the classic word-guessing game Hangman.
+Welcome to Hangmage, my spin on the classic word-guessing game Hangman.
 
 ### The Plot
 

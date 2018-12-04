@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://cors-anywhere.herokuapp.com/http://app.linkedin-reach.io/words')
+    fetch('http://app.linkedin-reach.io/words')
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n');
@@ -126,7 +126,7 @@ class App extends Component {
           <header>
             <h1> HangMage </h1>
           </header>
-          
+
           <main>
                 <BeholderBox
                   attempts={attempts}

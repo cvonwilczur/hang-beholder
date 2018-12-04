@@ -28,11 +28,11 @@ class App extends Component {
     fetch('https://cors-anywhere.herokuapp.com/http://app.linkedin-reach.io/words')
       .then(response => response.text())
       .then(contents => {
-        const wordsArray = contents.split('\n')
-        const easyArray = wordsArray.filter(word => word.length <= 4)
+        const wordsArray = contents.split('\n');
+        const easyArray = wordsArray.filter(word => word.length <= 4);
         this.setState({ secretWord: easyArray[this.randomizeNumber(easyArray.length)].split(''),
                         secretWords: wordsArray,
-                        easyWords: easyArray})
+                        easyWords: easyArray});
     })
   }
 
@@ -71,8 +71,8 @@ class App extends Component {
             secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')})
         }
         break;
-        default:
-          break;
+      default:
+        break;
       }
     }
 
@@ -118,7 +118,9 @@ class App extends Component {
 
   render() {
     const { attempts, secretWord, letterGuesses, gameWon, difficulty } = this.state;
-    return (
+    return ( secretWord.length === 0 ?
+      <h1 className="loading">The Portal Is Opening!</h1> :
+      (
       <div className="App">
         <header>
           <h1> HangMage </h1>
@@ -148,9 +150,7 @@ class App extends Component {
              }
              <div className="grid"></div>
         </main>
-
-
-      </div>
+      </div>)
     );
   }
 }

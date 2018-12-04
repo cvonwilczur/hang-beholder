@@ -3,12 +3,12 @@ import './Letter.css'
 
 const Letter = ({ letterGuesses, letterValue, guessLetter }) => {
   return (
-      guessLetter ?
+      guessLetter
+      ?
         <span className="guessedletterTiles"> {letterGuesses.includes(letterValue) ? letterValue : '☐'} </span>
       :
         <span className="letterTiles">{letterGuesses.includes(letterValue) ? letterValue : '☐'} </span>
-
-  )
+  );
 }
 
 export default Letter;

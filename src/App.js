@@ -5,7 +5,6 @@ import RenderBox from './components/renderbox/RenderBox';
 import GameOver from './components/gameover/GameOver';
 import BeholderBox from './components/beholderbox/BeholderBox';
 
-
 class App extends Component {
   constructor() {
     super()
@@ -47,7 +46,7 @@ class App extends Component {
     switch(event.target.value){
       case 'Easy':
         this.setState( {
-          secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
+          secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')});
         break;
       case 'Medium':
         if(!medWords){
@@ -57,7 +56,7 @@ class App extends Component {
                         });
         } else {
           this.setState( {
-            secretWord: medWords[this.randomizeNumber(medWords.length)].split('')})
+            secretWord: medWords[this.randomizeNumber(medWords.length)].split('')});
         }
         break;
       case 'Hard':
@@ -68,7 +67,7 @@ class App extends Component {
                         });
         } else {
           this.setState( {
-            secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')})
+            secretWord: hardWords[this.randomizeNumber(hardWords.length)].split('')});
         }
         break;
       default:
@@ -90,12 +89,12 @@ class App extends Component {
     const { inputValue, letterGuesses, attempts, secretWord } = this.state;
     const oldLetterGuesses = letterGuesses;
     if (!secretWord.includes(inputValue) && inputValue !== secretWord.join('') && inputValue && !oldLetterGuesses.includes(inputValue)){
-      this.setState({ attempts: attempts + 1 })
+      this.setState({ attempts: attempts + 1 });
     }
     oldLetterGuesses.push(inputValue);
-    this.setState( { letterGuesses: oldLetterGuesses })
+    this.setState({ letterGuesses: oldLetterGuesses });
     if (secretWord.every(letter => letterGuesses.indexOf(letter) > -1) || inputValue === secretWord.join('')){
-      this.setState({ gameWon: true })
+      this.setState({ gameWon: true });
     }
   }
 
@@ -107,7 +106,7 @@ class App extends Component {
       gameWon: false,
       inputValue: '',
       difficulty: 'Easy',
-      secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')})
+      secretWord: easyWords[this.randomizeNumber(easyWords.length)].split('')});
   }
 
   randomizeNumber = (upperLimit) => {
@@ -118,39 +117,44 @@ class App extends Component {
 
   render() {
     const { attempts, secretWord, letterGuesses, gameWon, difficulty } = this.state;
-    return ( secretWord.length === 0 ?
-      <h1 className="loading">The Portal Is Opening!</h1> :
-      (
-      <div className="App">
-        <header>
-          <h1> HangMage </h1>
-        </header>
-
-        <main>
-              <BeholderBox
-                attempts={attempts}
-              />
-              <RenderBox
-                attempts={attempts}
-                secretWord={secretWord}
-                letterGuesses={letterGuesses}
-               />
-             { gameWon || attempts === 6 ?
-               <GameOver
-                 gameWon={gameWon}
-                 reset={this.reset} />
-                 :
-              <InputBox
-                handleSubmitClick={this.handleSubmitClick}
-                handleSubmitKey={this.handleSubmitKey}
-                handleChange={this.handleChange}
-                handleChangeRadio={this.handleChangeRadio}
-                difficulty={difficulty}
-               />
-             }
-             <div className="grid"></div>
-        </main>
-      </div>)
+    return (
+      secretWord.length === 0
+      ?
+        <h1 className="loading">The Portal Is Opening!</h1>
+      :
+        (<div className="App">
+          <header>
+            <h1> HangMage </h1>
+          </header>
+          
+          <main>
+                <BeholderBox
+                  attempts={attempts}
+                />
+                <RenderBox
+                  attempts={attempts}
+                  secretWord={secretWord}
+                  letterGuesses={letterGuesses}
+                 />
+               {
+                 gameWon || attempts === 6
+                 ?
+                   <GameOver
+                     gameWon={gameWon}
+                     reset={this.reset}
+                   />
+                  :
+                   <InputBox
+                     handleSubmitClick={this.handleSubmitClick}
+                     handleSubmitKey={this.handleSubmitKey}
+                     handleChange={this.handleChange}
+                     handleChangeRadio={this.handleChangeRadio}
+                     difficulty={difficulty}
+                    />
+               }
+               <div className="grid"></div>
+          </main>
+        </div>)
     );
   }
 }

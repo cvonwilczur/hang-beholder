@@ -20,7 +20,7 @@ body {
 }
 
 /* credit to George-Payne's codepen for below grid */
-.grid{
+.grid {
   top: -400px;
   bottom: -400px;
   left: -400px;
@@ -28,12 +28,10 @@ body {
   position: absolute;
   z-index: -1;
   opacity: 0.5;
-
   background-color: #313640;
   background-image: linear-gradient(#FF0092 1px, transparent 2px),
   linear-gradient(90deg, #FF0092 1px, transparent 2px);
-  background-size:3% 3%, 3% 3%;
-  background-position:0 0, 0 0;
-
+  background-size: 3% 3%, 3% 3%;
+  background-position: 0 0, 0 0;
   transform: perspective(300px) rotateX(80deg);
 }

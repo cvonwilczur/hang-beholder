@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://app.linkedin-reach.io/words')
+    fetch('https://cors-anywhere.herokuapp.com/http://app.linkedin-reach.io/words')
       .then(response => response.text())
       .then(contents => {
         const wordsArray = contents.split('\n');
